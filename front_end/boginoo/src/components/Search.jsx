@@ -1,8 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../Context/Context";
+import axios from "axios";
 
 function Search() {
-  const { createPost, inputValue, setInputValue } = useContext(Context);
+  const { inputValue, setInputValue } = useContext(Context);
+  const urlShortener = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/link/short", {
+        orignal_link: inputValue,
+        ownerID: "nasaa@gmail.com",
+      });
+      // setLinks(shortRes?.data?.short_link);
+      console.log(response);
+    } catch (error) {
+      console.log("err");
+    }
+  };
+
   return (
     <>
       <div
@@ -32,9 +46,7 @@ function Search() {
           type="text"
         />
         <button
-          onClick={() => {
-            createPost();
-          }}
+          onClick={urlShortener}
           style={{
             height: "100%",
             borderRadius: "100px",

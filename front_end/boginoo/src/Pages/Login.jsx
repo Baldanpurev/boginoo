@@ -5,7 +5,7 @@ import hide from "../image/hide.png";
 import { Context } from "../Context/Context";
 
 export default function Login() {
-  const { Login, user,inputValue } = useContext(Context);
+  const { Login } = useContext(Context);
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [show, setShow] = useState(true);
@@ -168,7 +168,6 @@ export default function Login() {
             paddingRight: "145px",
           }}
           onClick={() => {
-            console.log(inputValue)
             Login( emailValue, passwordValue );
           }}
         >

@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 export const Context = createContext({});
 
 export function Provider({ children }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [short, setShort] = useState("");
@@ -23,9 +23,8 @@ export function Provider({ children }) {
     }
   );
 
-  const Login = async (user, password ) => {
+  const Login = async (user, password) => {
     try {
-      console.log("Adsf")
       await axios
         .post("http://localhost:8000/user/login", {
           email: user,
@@ -39,18 +38,6 @@ export function Provider({ children }) {
       alert("Нууц үг эсвэл Цахим хаяг буруу байна");
     }
   };
-  const createPost = async () => {
-    try {
-      const shortRes = await axios.post("http://localhost:8000/link/", {
-        orignal_link: inputValue,
-      });
-      setShort(shortRes?.data?.short_link);
-      console.log(short);
-      console.log(shortRes);
-    } catch (error) {
-      console.log("erer");
-    }
-  };
 
   return (
     <Context.Provider
@@ -58,7 +45,6 @@ export function Provider({ children }) {
         Login,
         user,
         inputValue,
-        createPost,
         setInputValue,
         orignal,
         setOrignal,
@@ -70,4 +56,3 @@ export function Provider({ children }) {
     </Context.Provider>
   );
 }
-

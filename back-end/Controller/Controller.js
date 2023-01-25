@@ -55,7 +55,7 @@ exports.createShort = async (req, res) => {
 exports.deleteShort = async (req, res) => {
   try {
     const id = req.params.id;
-    const delete_short = await Data.findByIdAndDelete(id);
+    const delete_short = await User.findByIdAndDelete(id);
     res.status(200).json(delete_short);
   } catch (error) {
     res.status(404).json(error.message);
@@ -64,8 +64,6 @@ exports.deleteShort = async (req, res) => {
 
 exports.getLinkByUser = async (req, res) => {
   const { usernameId } = req.params;
-  console.log(usernameId);
-  const Links = await Data.find({ ownerID: usernameId });
-  console.log(Links);
+  const Links = await User.find({ ownerID: usernameId });
   res.status(200).json(Links);
 };
