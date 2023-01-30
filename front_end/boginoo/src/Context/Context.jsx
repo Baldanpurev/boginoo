@@ -25,15 +25,13 @@ export function Provider({ children }) {
 
   const Login = async (user, password) => {
     try {
-      await axios
-        .post("http://localhost:8000/user/login", {
-          email: user,
-          password: password,
-        })
-        .then((el) => {
-          setUser(el?.data?.user);
-          navigate("/userProfile");
-        });
+      const res = await axios.post("http://localhost:8000/user/login/", {
+        email: user,
+        password: password,
+      });
+      console.log(res?.data.user);
+      setUser(res?.data?.user);
+      navigate("/userProfile");
     } catch (error) {
       alert("Нууц үг эсвэл Цахим хаяг буруу байна");
     }

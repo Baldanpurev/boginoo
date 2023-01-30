@@ -65,5 +65,16 @@ exports.deleteShort = async (req, res) => {
 exports.getLinkByUser = async (req, res) => {
   const { usernameId } = req.params;
   const Links = await User.find({ ownerID: usernameId });
+  console.log(Links, usernameId);
   res.status(200).json(Links);
+};
+
+exports.getRedirectLink = async (req, res) => {
+  try {
+    const { short_link } = req.params;
+    const Links = await User.find({ ownerID: short_link });
+    res.status(200).json(Links);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
 };

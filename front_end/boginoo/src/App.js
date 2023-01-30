@@ -6,6 +6,8 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import User from "./Pages/User";
 import { Provider } from "./Context/Context";
+import Redirect from "./Pages/Redirect";
+import History from "./Pages/History";
 
 function App() {
   return (
@@ -14,9 +16,11 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/:redirect" element={<Redirect />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/userProfile" element={<User />} />
+            <Route path="/history/:email" element={<History />} />
           </Routes>
         </Layout>
       </Provider>

@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context/Context";
 import axios from "axios";
 
 function Search() {
   const { inputValue, setInputValue } = useContext(Context);
+  const { user } = useContext(Context);
   const urlShortener = async () => {
     try {
       const response = await axios.post("http://localhost:8000/link/short", {
         orignal_link: inputValue,
-        ownerID: "nasaa@gmail.com",
+        ownerID: user?._id,
       });
-      // setLinks(shortRes?.data?.short_link);
       console.log(response);
     } catch (error) {
       console.log("err");

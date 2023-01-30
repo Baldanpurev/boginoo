@@ -12,9 +12,7 @@ function Home() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await axios.get(
-          `http://localhost:8000/link/nasaa@gmail.com`
-        );
+        const data = await axios.get(`http://localhost:8000/link/${user?._id}`);
         console.log(data);
         setData(data.data);
       } catch (err) {
