@@ -20,7 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/userProfile" element={<User />} />
-            <Route path="/history/:email" element={<History />} />
+            <Route path="/history/:shortlink" element={<History />} />
           </Routes>
         </Layout>
       </Provider>

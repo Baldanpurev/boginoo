@@ -63,18 +63,24 @@ exports.deleteShort = async (req, res) => {
 };
 
 exports.getLinkByUser = async (req, res) => {
-  const { usernameId } = req.params;
-  const Links = await User.find({ ownerID: usernameId });
-  console.log(Links, usernameId);
+  const { email } = req.params;
+  const Links = await User.find({ ownerID: email });
+  console.log(Links, email);
   res.status(200).json(Links);
 };
 
 exports.getRedirectLink = async (req, res) => {
   try {
     const { short_link } = req.params;
-    const Links = await User.find({ ownerID: short_link });
-    res.status(200).json(Links);
+    console.log(req.params);
+    const Link = await User.findOne({ short_link: short_link });
+    console.log(Link);
+    if (Link) {
+      res.status(200).json({ orignal_links: Link });
+    } else {
+      res.status(404).json({ message: "iim zuil bhgui" });
+    }
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json({ error: error });
   }
 };

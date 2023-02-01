@@ -1,4 +1,4 @@
-import React,{ useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "../components/Logo";
 import eye from "../image/eye.png";
 import hide from "../image/hide.png";
@@ -168,7 +168,7 @@ export default function Login() {
             paddingRight: "145px",
           }}
           onClick={() => {
-            Login( emailValue, passwordValue );
+            Login(emailValue, passwordValue);
           }}
         >
           НЭВТРЭХ

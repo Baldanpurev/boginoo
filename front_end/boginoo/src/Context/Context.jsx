@@ -11,7 +11,6 @@ export function Provider({ children }) {
   const [inputValue, setInputValue] = useState("");
   const [short, setShort] = useState("");
   const [orignal, setOrignal] = useState("");
-
   axios.interceptors.request.use(
     (config) => {
       const token = Cookies.get("token");

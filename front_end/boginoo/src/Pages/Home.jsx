@@ -8,19 +8,11 @@ import { Context } from "../Context/Context";
 
 function Home() {
   const { user } = useContext(Context);
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await axios.get(`http://localhost:8000/link/${user?._id}`);
-        console.log(data);
-        setData(data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getData();
-  }, []);
+  const [data, setData] = useState({
+    orignal_link: "",
+    short_link: "",
+  });
+
   return (
     <div
       style={{
@@ -33,7 +25,7 @@ function Home() {
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
         <Logo />
-        <Search />
+        <Search setData={setData} />
       </div>
 
       <div>
@@ -56,24 +48,19 @@ function Home() {
                 gap: "25px",
               }}
             >
-              {data?.map((el, index) => {
-                console.log(el);
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      gap: 50,
-                      width: "100%",
-                    }}
-                  >
-                    <p>{el.orignal_link}</p>
-                    <p>http://localhost:3000/{el.short_link}</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: 50,
+                  width: "100%",
+                }}
+              >
+                <p>{data.orignal_link}</p>
+                <p>http://localhost:3000/{data.short_link}</p>
 
-                    <p style={{ color: " #02B589" }}>Хуулж авах</p>
-                  </div>
-                );
-              })}
+                <p style={{ color: " #02B589" }}>Хуулж авах</p>
+              </div>
             </div>
           </div>
         </div>

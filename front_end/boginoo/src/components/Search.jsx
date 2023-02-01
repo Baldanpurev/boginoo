@@ -1,20 +1,27 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../Context/Context";
 import axios from "axios";
 
-function Search() {
+function Search(props) {
+  const { setData } = props;
   const { inputValue, setInputValue } = useContext(Context);
-  const { user } = useContext(Context);
+  const [loading, setLoading] = useState(false);
+  const { email } = useContext(Context);
+
   const urlShortener = async () => {
+    setLoading(true);
     try {
       const response = await axios.post("http://localhost:8000/link/short", {
         orignal_link: inputValue,
-        ownerID: user?._id,
+        // ownerID: user?._id,
+        ownerID: email,
       });
       console.log(response);
+      setData(response.data.short);
     } catch (error) {
       console.log("err");
     }
+    setLoading(false);
   };
 
   return (
@@ -46,6 +53,7 @@ function Search() {
           type="text"
         />
         <button
+          disabled={loading}
           onClick={urlShortener}
           style={{
             height: "100%",
@@ -58,7 +66,7 @@ function Search() {
             border: "none",
           }}
         >
-          БОГИНОСГОХ
+          {loading ? "...LOADING" : "БОГИНОСГОХ"}
         </button>
       </div>
     </>

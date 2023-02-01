@@ -15,6 +15,7 @@ Router.post("/register", createUser);
 Router.post("/short", createShort);
 Router.delete("/:id", deleteUser);
 Router.patch("/:id", updateUser);
-Router.get("/:usernameId", getLinkByUser);
-Router.get("/:shortlink", getRedirectLink);
+Router.get("/:email", getLinkByUser);
+Router.get("/redirect/:short_link", getRedirectLink);
+
 module.exports = Router;
