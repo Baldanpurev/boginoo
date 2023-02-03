@@ -1,17 +1,23 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Redirect = () => {
   const { redirect } = useParams;
-
+  const navigate = useNavigate();
   useEffect(() => {
     const redirectTo = async () => {
       try {
         const res = await axios.get(
           `http://localhost:8000/link/redirect/${"qcp37"}`
         );
-        window.location.replace(res.data.orignal_link.orignal_link);
+        const originalLink = res.data.orignal_links?.orignal_link;
+        console.log(originalLink);
+        if (originalLink) {
+          window.location.replace(originalLink);
+        } else {
+          navigate("/");
+        }
       } catch (error) {
         console.log("err", error);
       }
